@@ -18,19 +18,16 @@ public class UserServiceImpl implements UserService {
     public List<String> getAllLogins() {
         return userRepository.getAllUsers().stream().map(User::getLogin).toList();
     }
-
     @Override
     public void createUser(String login, String pass) {
         if ((login != null && !login.isEmpty())
-                && (pass != null && !pass.isEmpty()))
-            try {
-                if (!verificationUser(login, pass)) {
-                    userRepository.addUser(new User(login, pass));
-                } else throw new UserNonUniqueException();
-            } catch (UserNonUniqueException e) {
-                e.getStackTrace("This user exists");
+                && (pass != null && !pass.isEmpty())) {
+            if (!verificationUser(login, pass)) {
+                userRepository.addUser(new User(login, pass));
+            } else {
+                throw new UserNonUniqueException("This user exists");
             }
-        else throw new IllegalArgumentException();
+        } else throw new IllegalArgumentException();
     }
 
     @Override

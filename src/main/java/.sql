@@ -36,4 +36,16 @@ SELECT first_name AS Имя,
 FROM employee
 WHERE first_name = 'Kurt'
    OR first_name = 'Monica'
-GROUP BY first_name, age;
+GROUP BY first_name;
+
+SELECT first_name AS Имя,
+       min(age) AS Минимальный_возраст
+FROM employee
+GROUP BY first_name;
+
+SELECT max(age)   AS Максимальный_возраст,
+       first_name AS Имя
+FROM employee
+WHERE first_name = 'Kurt'
+   OR first_name = 'Monica'
+group by first_name;

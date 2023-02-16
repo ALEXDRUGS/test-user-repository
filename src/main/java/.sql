@@ -108,7 +108,17 @@ FROM employee e
 INSERT INTO employee(first_name, last_name, gender, age, city_id)
 VALUES ('Kurt', 'Russell', 'male', 71, null);
 
+SELECT first_name, last_name, city_name
+FROM employee e
+         LEFT JOIN city c
+              ON e.city_id = c.city_id;
+
+SELECT first_name, last_name, city_name
+FROM employee e
+         RIGHT JOIN city c
+              ON e.city_id = c.city_id;
+
 SELECT city_name, first_name, last_name
 FROM city c
-         JOIN employee e
+         FULL OUTER JOIN employee e
               ON c.city_id = e.city_id;
